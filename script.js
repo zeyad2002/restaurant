@@ -4,6 +4,6 @@ const navMenu = document.getElementById('nav-menu');
 
 
 toggleButton.addEventListener('click', () => {
-  navMenu.classList.toggle('show'); // تبديل كلاس "show" لإظهار/إخفاء القائمة
+  navMenu.classList.toggle('show'); 
 });
 
