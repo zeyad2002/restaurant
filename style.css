@@ -89,6 +89,16 @@ header {
     margin-bottom: 20px;
 }
 
+.header-content h1 #s{
+    color: #f4b400;
+    display: inline;
+}
+
+.header-content h1 #t{
+    color: #f4b400;
+    display: inline;
+}
+
 .header-content p {
     font-size: 1.2rem;
     margin-bottom: 30px;
@@ -107,6 +117,20 @@ header {
 
 .header-content .btn:hover {
     background: #d99400;
+}
+
+.menu .submenu {
+    display: none;
+    position: fixed; 
+    background-color: #0e0e0e;
+    padding: 10px;
+    list-style: none;
+    justify-content:space-around ;
+    
+}
+
+.menu li:hover .submenu {
+    display: block;
 }
 
 /* Main Section */
