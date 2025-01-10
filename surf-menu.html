@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Menu</title>
+    <link rel="stylesheet" href="style/surf-menu.css">     
+</head>
+<body>
+    <header>
+        <button id="toggle-nav">☰</button>
+        <nav id="nav-menu">
+            <ul class="menu">
+                <li><a href="index.html">Home</a></li>
+                
+        
+                    <li><a href="#tajine">TAJINE</a></li>
+                
+            </li>
+                <li><a href="#order-online">Order Online</a></li>
+                <li><a href="book a table.html">Book a Table</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <h1>Surf and Turf</h1>
+    </header>
+
+    <div class="menu-buttons">
+        <button onclick="showSection('hot-drinks')">Hot Drinks</button>
+        <button onclick="showSection('Omlette')">Omlette</button>
+        <button onclick="showSection('pizza')">Pizza</button>
+        <button onclick="showSection('cold-asndwich')">Cold Sandwich</button>
+        <button onclick="showSection('pasta')">Pasta</button>
+        <button onclick="showSection('main-breakfast')">Main Breakfast</button>
+        <button onclick="showSection('bakery')">Bakery</button>
+        <button onclick="showSection('soups')">Soups</button>
+        <button onclick="showSection('salad')">Salad</button>
+        <button onclick="showSection('appetizers')">Appetizers</button>
+        <button onclick="showSection('chesspans')">Cheesepans Corner</button>
+        <button onclick="showSection('Hot-sandwich')">Hot Sandwich</button>
+        <button onclick="showSection('burger')">Burger</button>
+        <button onclick="showSection('kids')">Kids Meals</button>
+        <button onclick="showSection('mix')">Mixes</button>
+        <button onclick="showSection('seafood')">Seafood</button>
+        <button onclick="showSection('pasta')">Pasta</button>
+        <button onclick="showSection('frensh')">Frensh Cousine</button>
+        <button onclick="showSection('american')">American Cousine</button>
+        <button onclick="showSection('italian')">Italian Cousine</button>
+        <button onclick="showSection('mexican')">Mexican Cousine</button>
+        <button onclick="showSection('asian')">Asian Cousine</button>
+        <button onclick="showSection('soft')">Soft Drinks & Soda</button>
+        <button onclick="showSection('coffe')">Coffe corner</button>
+        <button onclick="showSection('fresh')">Fresh juices & Smothie</button>
+        <button onclick="showSection('milksh')">MilkShake</button>
+        <button onclick="showSection('dessert')">Desserts</button>
+        
+        
+        
+        
+        
+    
+     
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    </div>
+    <div id="pizza" class="menu-section">
+        <div class="menu-item">
+            <img src="ivan-torres-MQUqbmszGGM-unsplash.jpg" alt="Pizza 1">
+            <div>
+                <h3>بيتزا مارغريتا</h3>
+                <p>.الوصف: عجينة هشة وصلصة طماطم وجبنة موزاريلا..</p>
+                <p>السعر: 50 جنيه</p>
+                <button class="add-to-cart" onclick="addToCart('بيتزا مارغريتا', 50)">إضافة إلى السلة</button>
+            </div>
+        </div>
+        <div class="menu-item">
+            <img src="ivan-torres-MQUqbmszGGM-unsplash.jpg" alt="Pizza 2">
+            <div>
+                <h3>بيتزا بيبروني</h3>
+                <p>الوصف: عجينة مقرمشة مع بيبروني وجبنة.</p>
+                <p style="padding-top:20px">السعر: 60 جنيه</p>
+                <button class="add-to-cart" onclick="addToCart('بيتزا بيبروني', 60)">إضافة إلى السلة</button>
+            </div>
+        </div>
+    </div>
+    <div id="hot-drinks" class="menu-section">
+        <div class="menu-item">
+            <img src="pizza2.jpg" alt="Pizza 2">
+            <div>
+                <h3>شاي</h3>
+                <p>.</p>
+                <p>السعر: 60 جنيه</p>
+                <button class="add-to-cart" onclick="addToCart('شاي', 60)">إضافة إلى السلة</button>
+            </div>
+        </div>
+        <div class="menu-item">
+            <img src="pizza2.jpg" alt="Pizza 2">
+            <div>
+                <h3>شاي نكهات</h3>
+                <p>نعناع الخ.</p>
+                <p>السعر: 60 جنيه</p>
+                <button class="add-to-cart" onclick="addToCart('شاي نكهات', 60)">إضافة إلى السلة</button>
+            </div>
+        </div>
+        <div class="menu-item">
+            <img src="pizza2.jpg" alt="Pizza 2">
+            <div>
+                <h3>ينسون</h3>
+                <p>اعشاب.</p>
+                <p>السعر: 60 جنيه</p>
+                <button class="add-to-cart" onclick="addToCart('ينسون', 60)">إضافة إلى السلة</button>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div id="Omlette" class="menu-section">
+        <!-- ساندوتشات -->
+        
+        
+    </div>
+
+
+
+
+    <button class="cart-icon" onclick="toggleCart()">🛒</button>
+
+    <div class="popup" id="cartPopup" style="width:80%">
+        <button class="close-cart" onclick="toggleCart()">✕</button>
+        <h2 style="text-align:center">الطلبات</h2>
+        <div id="cartItems"></div>
+        <textarea placeholder="أدخل ملاحظاتك هنا..."></textarea>
+        <input type="number" placeholder="ادخل رقم الطاولة">
+        <button class="send-order">إرسال الطلب</button>
+    </div>
+    
+
+    <script src="script/surf-menu.js"></script>
+</body>
+</html>
