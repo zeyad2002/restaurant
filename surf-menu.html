@@ -1,278 +1,477 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Restaurant Menu</title>
-    <link rel="stylesheet" href="surf-menu.css">     
+    <title>Sufr & Turf menu </title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1e1e1e;
+            color: #ffcc00;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px;
+        }
+
+        #nav-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            height: 100%;
+            background-color: #000000cc;
+            color: white;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease-in-out;
+            z-index: 999;
+        }
+
+        #nav-menu ul {
+            list-style: none;
+            padding-left: 10px;
+            padding-top: 70px;
+        }
+
+        #nav-menu ul li {
+            margin: 15px 0px;
+            padding: 10px;
+        }
+
+        #nav-menu ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        #nav-menu ul li a:hover {
+            color: #f4b400;
+        }
+
+        #toggle-nav {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            font-size: 24px;
+            background-color: #000000cc;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        #nav-menu.show {
+            transform: translateX(0);
+        }
+
+        .menu-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin: 20px;
+        }
+
+        .menu-buttons button {
+            background-color: #ffcc00;
+            color: #1e1e1e;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+            transition: 0.7s;
+        }
+
+        .menu-buttons button:hover {
+            background-color: #e6b800;
+            transform: scale(0.90);
+        }
+
+        .category-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin: 20px;
+        }
+
+        .category-button {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            aspect-ratio: 1 / 1; /* يجعل الأزرار مربعة */
+            background-color: #333;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .category-button img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        .category-button .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px;
+            z-index: 2;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .category-button:hover {
+            transform: scale(0.90);
+        }
+
+        .menu-section {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .menu-section.active {
+            display: block;
+        }
+
+        .menu-section .close-section {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #ffcc00;
+            color: #1e1e1e;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            border-bottom: 1px solid #333;
+            background-color: #1e1e1e;
+            margin-bottom: 10px;
+            border-radius: 10px;
+        }
+
+        .menu-item img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin: 15px;
+        }
+
+        .menu-item:nth-child(odd) {
+            flex-direction: row;
+        }
+
+        .menu-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .add-to-cart {
+            margin-top: 10px;
+            background-color: #ffcc00;
+            color: #1e1e1e;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .add-to-cart:hover {
+            background-color: #e6b800;
+        }
+
+        .cart-icon {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #ffcc00;
+            color: #1e1e1e;
+            border: none;
+            padding: 15px;
+            cursor: pointer;
+            border-radius: 50%;
+            font-size: 20px;
+        }
+
+        .popup {
+            position: fixed;
+            top: 0;
+            right: 0;
+            background-color: #333;
+            color: #ffcc00;
+            width: 300px;
+            height: 100vh;
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+            padding: 20px;
+            box-shadow: -5px 0 10px rgba(0, 0, 0, 0.5);
+            overflow-y: auto;
+            z-index:998;
+        }
+
+        .popup.active {
+            transform: translateX(0);
+        }
+
+        .popup h2 {
+            margin-top: 0;
+            text-align: center;
+        }
+
+        .popup .cart-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .popup button {
+            background-color: #ffcc00;
+            color: #1e1e1e;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .popup textarea {
+            width: 80%;
+            height: 60px;
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            background: #1e1e1e;
+            color: #fcd34d;
+            border: solid 1px #333;
+            text-align: right;
+        }
+
+        input {
+            background: #1e1e1e;
+            text-align: right;
+            border: solid 2px #1e1e1e;
+            margin-left: 10px;
+        }
+
+        .popup .send-order {
+            margin-top: 10px;
+            width: 100%;
+            padding: 10px;
+            background-color: #ffcc00;
+            color: #1e1e1e;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .popup .send-order:hover {
+            background-color: #e6b800;
+        }
+
+        .popup .close-cart {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #ffcc00;
+            color: #1e1e1e;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        /* Toast Message */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            z-index: 1000;
+            display: none;
+            animation: fadeInOut 3s ease-in-out;
+        }
+
+        @keyframes fadeInOut {
+            0% { opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .category-buttons {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            }
+
+            .category-button .overlay {
+                font-size: 14px;
+                padding: 8px;
+            }
+
+            .menu-item {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .menu-item img {
+                height: auto;
+                margin: 10px 0;
+            }
+
+            .toast {
+                width: 90%;
+                text-align: center;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
-        
         <button id="toggle-nav">☰</button>
         <nav id="nav-menu">
             <ul class="menu">
-                <li><a href="D:\restaurant\index.html">Home</a></li>
-                <li><a href="#tajine">TAJINE - Menu</a></li>
-                <li><a href="#order-online">Order Online</a></li>
-                <li><a href="D:\restaurant\book a table\book a table.html">Book a Table</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#tajine">Tajiin-menu</a></li>
+                <li><a href="#order-online">Order online </a></li>
+                <li><a href="حجز.html">Book a table or event </a></li>
+                <li><a href="#contact"> Contact</a></li>
             </ul>
         </nav>
-        
-        <h1>Surf and Turf</h1>
+        <h1>  Surf & Turf</h1>
     </header>
 
+    <!-- الأزرار الرئيسية -->
     <div class="menu-buttons">
-        <button onclick="showSection('hot-drinks')">Hot Drinks</button>
-        <button onclick="showSection('Omlette')">Omlette</button>
-        <button onclick="showSection('pizza')">Pizza</button>
-        <button onclick="showSection('cold-asndwich')">Cold Sandwich</button>
-        <button onclick="showSection('pasta')">Pasta</button>
-        <button onclick="showSection('main-breakfast')">Main Breakfast</button>
-        <button onclick="showSection('bakery')">Bakery</button>
-        <button onclick="showSection('soups')">Soups</button>
-        <button onclick="showSection('salad')">Salad</button>
-        <button onclick="showSection('appetizers')">Appetizers</button>
-        <button onclick="showSection('chesspans')">Cheesepans Corner</button>
-        <button onclick="showSection('Hot-sandwich')">Hot Sandwich</button>
-        <button onclick="showSection('burger')">Burger</button>
-        <button onclick="showSection('kids')">Kids Meals</button>
-        <button onclick="showSection('mix')">Mixes</button>
-        <button onclick="showSection('seafood')">Seafood</button>
-        <button onclick="showSection('pasta')">Pasta</button>
-        <button onclick="showSection('frensh')">Frensh Cousine</button>
-        <button onclick="showSection('american')">American Cousine</button>
-        <button onclick="showSection('italian')">Italian Cousine</button>
-        <button onclick="showSection('mexican')">Mexican Cousine</button>
-        <button onclick="showSection('asian')">Asian Cousine</button>
-        <button onclick="showSection('soft')">Soft Drinks & Soda</button>
-        <button onclick="showSection('coffe')">Coffe corner</button>
-        <button onclick="showSection('fresh')">Fresh juices & Smothie</button>
-        <button onclick="showSection('milksh')">MilkShake</button>
-        <button onclick="showSection('dessert')">Desserts</button>
-        
-        
-        
-        
-        
-    
-     
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+        <button onclick="toggleSubButtons('food')">Food</button>
+        <button onclick="toggleSubButtons('drink')">Drinks</button>
+        <button onclick="toggleSubButtons('dessert')">Desserts</button>
     </div>
-<!-- Pizza -->
 
+    <!-- الأزرار الفرعية للمأكولات -->
+    <div id="food-buttons" class="category-buttons" style="display: none;">
+        <div class="category-button" onclick="showSection('pizza')">
+            <img src="ivan-torres-MQUqbmszGGM-unsplash.jpg" alt="بيتزا">
+            <div class="overlay">Pizza</div>
+        </div>
+        <div class="category-button" onclick="showSection('sandwiches')">
+            <img src="Cold Roast Beef Sandwich with Horseradish Cheese.jfif" alt="sandwiches">
+            <div class="overlay">Sandwiches</div>
+        </div>
+        <div class="category-button" onclick="showSection('pasta')">
+            <img src="478986ee-31de-40d3-b2c6-2e759fdc4c5a.jfif" alt="Pasta">
+            <div class="overlay">Pasta</div>
+        </div>
+       
+        <!-- أضف المزيد من الأزرار الفرعية هنا -->
+    </div>
+
+    <!-- الأزرار الفرعية للمشروبات -->
+    <div id="drink-buttons" class="category-buttons" style="display: none;">
+        <div class="category-button" onclick="showSection('hot-drinks')">
+            <img src="tea.jpg" alt="شاي">
+            <div class="overlay">شاي</div>
+        </div>
+        <div class="category-button" onclick="showSection('soft-drinks')">
+            <img src="soda.jpg" alt="مشروبات غازية">
+            <div class="overlay">مشروبات غازية</div>
+        </div>
+        <!-- أضف المزيد من الأزرار الفرعية هنا -->
+    </div>
+
+    <!-- الأزرار الفرعية للحلويات -->
+    <div id="dessert-buttons" class="category-buttons" style="display: none;">
+        <div class="category-button" onclick="showSection('cake')">
+            <img src="cake.jpg" alt="كيك">
+            <div class="overlay">كيك</div>
+        </div>
+        <div class="category-button" onclick="showSection('ice-cream')">
+            <img src="ice-cream.jpg" alt="آيس كريم">
+            <div class="overlay">آيس كريم</div>
+        </div>
+        <!-- أضف المزيد من الأزرار الفرعية هنا -->
+    </div>
+
+    <!-- أقسام القائمة -->
     <div id="pizza" class="menu-section">
+        <button class="close-section" onclick="closeSection('pizza')">✕</button>
         <div class="menu-item">
-            <img src="ivan-torres-MQUqbmszGGM-unsplash.jpg" alt="Pizza 1">
+            <img src="ivan-torres-MQUqbmszGGM-unsplash.jpg" alt="بيتزا مارغريتا">
             <div>
                 <h3>بيتزا مارغريتا</h3>
-                <p>.الوصف: عجينة هشة وصلصة طماطم وجبنة موزاريلا..</p>
+                <p>عجينة هشة وصلصة طماطم وجبنة موزاريلا.</p>
                 <p>السعر: 50 جنيه</p>
                 <button class="add-to-cart" onclick="addToCart('بيتزا مارغريتا', 50)">إضافة إلى السلة</button>
             </div>
         </div>
-
         <div class="menu-item">
-            <img src="ivan-torres-MQUqbmszGGM-unsplash.jpg" alt="Pizza 2">
+            <img src="ivan-torres-MQUqbmszGGM-unsplash.jpg" alt="بيتزا بيبروني">
             <div>
                 <h3>بيتزا بيبروني</h3>
-                <p>الوصف: عجينة مقرمشة مع بيبروني وجبنة.</p>
-                <p style="padding-top:20px">السعر: 60 جنيه</p>
+                <p>عجينة مقرمشة مع بيبروني وجبنة.</p>
+                <p>السعر: 60 جنيه</p>
+                <button class="add-to-cart" onclick="addToCart('بيتزا بيبروني', 60)">إضافة إلى السلة</button>
+            </div>
+        </div>
+        <div class="menu-item">
+            <img src="ivan-torres-MQUqbmszGGM-unsplash.jpg" alt="بيتزا بيبروني">
+            <div>
+                <h3>بيتزا بيبروني</h3>
+                <p>عجينة مقرمشة مع بيبروني وجبنة.</p>
+                <p>السعر: 60 جنيه</p>
+                <button class="add-to-cart" onclick="addToCart('بيتزا بيبروني', 60)">إضافة إلى السلة</button>
+            </div>
+        </div>
+        <div class="menu-item">
+            <img src="ivan-torres-MQUqbmszGGM-unsplash.jpg" alt="بيتزا بيبروني">
+            <div>
+                <h3>بيتزا بيبروني</h3>
+                <p>عجينة مقرمشة مع بيبروني وجبنة.</p>
+                <p>السعر: 60 جنيه</p>
                 <button class="add-to-cart" onclick="addToCart('بيتزا بيبروني', 60)">إضافة إلى السلة</button>
             </div>
         </div>
     </div>
 
-    <!-- Hot Drink -->
-
-    <div id="hot-drinks" class="menu-section">
-        <div class="menu-item">
-            <img src="cibao-chua-7hohUWqBqU4-unsplash.jpg" alt="Pizza 2">
-            <div>
-                <h3>Tea</h3>
-                <p>.</p>
-                <p>Price : 25 EP</p>
-                <button class="add-to-cart" onclick="addToCart('Tea', 25)">Add your order</button>
-            </div>
-        </div>
-
-        <div class="menu-item">
-            <img src="vd-photography-vubtoFtT7-s-unsplash.jpg" alt="Pizza 2">
-            <div>
-                <h3>Milk Tea</h3>
-                <p>.</p>
-                <p>price : 35 EP</p>
-                <button class="add-to-cart" onclick="addToCart('Milk Tea', 35)">Add your order</button>
-            </div>
-        </div>
-
-        <div class="menu-item">
-            <img src="zoe-N4GN-4s9-rs-unsplash.jpg" alt="Pizza 2">
-            <div>
-                <h3>Green Tea</h3>
-                <p>.</p>
-                <p>price : 28 EP</p>
-                <button class="add-to-cart" onclick="addToCart('Green Tea', 28)">Add your order</button>
-            </div>
-        </div>
-
-        <div class="menu-item">
-            <img src="teacora-rooibos-n664AxrUszE-unsplash.jpg" alt="Pizza 2">
-            <div>
-                <h3>Flavor Tea</h3>
-                <p>.</p>
-                <p>price : 28 EP</p>
-                <button class="add-to-cart" onclick="addToCart('Flavor Tea', 28)">Add your order</button>
-            </div>
-        </div>
-
-        <div class="menu-item">
-            <img src="jen-p-FoG8lotg7AA-unsplash.jpg" alt="Pizza 2">
-            <div>
-                <h3>Herbs</h3>
-                <p>.</p>
-                <p>price : 28 EP</p>
-                <button class="add-to-cart" onclick="addToCart('Herbs', 28)">Add your order</button>
-            </div>
-        </div>
-
-        <div class="menu-item">
-            <img src="alexander-mils-QQ78mqzN0cw-unsplash.jpg" alt="Pizza 2">
-            <div>
-                <h3>Hot cider</h3>
-                <p>.</p>
-                <p>price : 44 EP</p>
-                <button class="add-to-cart" onclick="addToCart('Hot cider', 44)">Add your order</button>
-            </div>
-        </div> 
-
-        <div class="menu-item">
-            <img src="pizza2.jpg" alt="Pizza 2">
-            <div>
-                <h3>Sahlab</h3>
-                <p>.</p>
-                <p>price : 60 EP</p>
-                <button class="add-to-cart" onclick="addToCart('Sahlab', 60)">Add your order</button>
-            </div>
-        </div>
-
-        <div class="menu-item">
-            <img src="pizza2.jpg" alt="Pizza 2">
-            <div>
-                <h3>Sahlab nuts</h3>
-                <p>.</p>
-                <p>price : 65 EP</p>
-                <button class="add-to-cart" onclick="addToCart('Sahlab nuts', 65)">Add your order</button>
-            </div>
-        </div>
-
-        <div class="menu-item">
-            <img src="giancarlo-duarte-RtHw0PWCLhw-unsplash.jpg" alt="Pizza 2">
-            <div>
-                <h3>Hot chocolate</h3>
-                <p>.</p>
-                <p>price : 57 EP</p>
-                <button class="add-to-cart" onclick="addToCart('Hot chocolate', 57)">Add your order</button>
-            </div>
-        </div> 
-
-        <div class="menu-item">
-            <img src="giancarlo-duarte-RtHw0PWCLhw-unsplash.jpg" alt="Pizza 2">
-            <div>
-                <h3>Hot chocolate flavor</h3>
-                <p>.</p>
-                <p>price : 63 EP</p>
-                <button class="add-to-cart" onclick="addToCart('Hot chocolate flavor', 63)">Add your order</button>
-            </div>
-        </div> 
-
-        <div class="menu-item">
-            <img src="patrick-fore-mnqP2FGloWs-unsplash.jpg" alt="Pizza 2">
-            <div>
-                <h3>Cinnamon milk</h3>
-                <p>.</p>
-                <p>price : 45 EP</p>
-                <button class="add-to-cart" onclick="addToCart('Cinnamon milk', 45)">Add your order</button>
-            </div>
-        </div> 
-
-        <div class="menu-item">
-            <img src="julia-topp-kuIiEew8V-A-unsplash.jpg" alt="Pizza 2">
-            <div>
-                <h3>Cinnamon ginger</h3>
-                <p>.</p>
-                <p>price : 45 EP</p>
-                <button class="add-to-cart" onclick="addToCart('Cinnamon ginger', 45)">Add your order</button>
-            </div>
-        </div> 
-
-        <div class="menu-item">
-            <img src="kelly-sikkema-vmE4S1_5kYU-unsplash.jpg" alt="Pizza 2">
-            <div>
-                <h3>Lemon ginger</h3>
-                <p>.</p>
-                <p>price : 45 EP</p>
-                <button class="add-to-cart" onclick="addToCart('Lemon ginger', 45)">Add your order</button>
-            </div>
-        </div> 
-
-        <div class="menu-item">
-            <img src="shreevardhan-iyer--aObj2FCvgs-unsplash.jpg" alt="Pizza 2">
-            <div>
-                <h3>Nescafe milk</h3>
-                <p>.</p>
-                <p>price : 55 EP</p>
-                <button class="add-to-cart" onclick="addToCart('Nescafe milk', 55)">Add your order</button>
-            </div>
-        </div> 
-
-        <div class="menu-item">
-            <img src="ihthisham-mohamed-tvsIMSM1ZKc-unsplash.jpg" alt="Pizza 2">
-            <div>
-                <h3>Nescafe black</h3>
-                <p>.</p>
-                <p>price : 50 EP</p>
-                <button class="add-to-cart" onclick="addToCart('Nescafe black', 50)">Add your order</button>
-            </div>
-        </div> 
-
-        <div class="menu-item">
-            <img src="cristiane-teston-Ueht3UtaL0I-unsplash.jpg" alt="Pizza 2">
-            <div>
-                <h3>English tea</h3>
-                <p>.</p>
-                <p>price : 95 EP</p>
-                <button class="add-to-cart" onclick="addToCart('English tea', 95)">Add your order</button>
-            </div>
-        </div> 
-    </div>
-
-        <!-- omlette-->
-
-    <div id="Omlette" class="menu-section">
-
-        
-        
-    </div>
-
-
-
-
+    <!-- سلة التسوق -->
     <button class="cart-icon" onclick="toggleCart()">🛒</button>
 
     <div class="popup" id="cartPopup" style="width:80%">
@@ -283,8 +482,91 @@
         <input type="number" placeholder="ادخل رقم الطاولة">
         <button class="send-order">إرسال الطلب</button>
     </div>
-    
 
-    <script src="surf-menu.js"></script>
+    <!-- Toast Message -->
+    <div id="toast" class="toast">تمت إضافة الطلب إلى السلة!</div>
+
+    <script>
+        let cart = [];
+
+        function toggleSubButtons(category) {
+            const subButtons = document.getElementById(`${category}-buttons`);
+            const allSubButtons = document.querySelectorAll('.category-buttons');
+
+            // إخفاء جميع الأزرار الفرعية أولاً
+            allSubButtons.forEach(button => {
+                if (button.id !== `${category}-buttons`) {
+                    button.style.display = 'none';
+                }
+            });
+
+            // تبديل حالة الأزرار الفرعية المحددة
+            if (subButtons.style.display === 'none' || subButtons.style.display === '') {
+                subButtons.style.display = 'grid';
+            } else {
+                subButtons.style.display = 'none';
+            }
+        }
+
+        function showSection(sectionId) {
+            document.querySelectorAll('.menu-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+        }
+
+        function closeSection(sectionId) {
+            document.getElementById(sectionId).classList.remove('active');
+        }
+
+        function addToCart(itemName, itemPrice) {
+            const existingItem = cart.find(item => item.name === itemName);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ name: itemName, price: itemPrice, quantity: 1 });
+            }
+            updateCart();
+            showToast();
+        }
+
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 3000); // تختفي الرسالة بعد 3 ثوانٍ
+        }
+
+        function toggleCart() {
+            document.getElementById('cartPopup').classList.toggle('active');
+        }
+
+        function updateCart() {
+            const cartItems = document.getElementById('cartItems');
+            cartItems.innerHTML = '';
+            cart.forEach((item, index) => {
+                const cartItem = document.createElement('div');
+                cartItem.classList.add('cart-item');
+                cartItem.innerHTML = `
+                    <span>${item.name} - ${item.price} جنيه (الكمية: ${item.quantity})</span>
+                    <button onclick="removeFromCart(${index})">حذف</button>
+                `;
+                cartItems.appendChild(cartItem);
+            });
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCart();
+        }
+
+        const toggleButton = document.getElementById('toggle-nav');
+        const navMenu = document.getElementById('nav-menu');
+
+        toggleButton.addEventListener('click', () => {
+            navMenu.classList.toggle('show');
+        });
+    </script>
 </body>
 </html>
