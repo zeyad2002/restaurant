@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Page</title>
+  <link rel="stylesheet" href="contact_style.css">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <button id="toggle-nav">☰</button>
+    <nav id="nav-menu">
+        <ul class="menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#tajine">Tajiin-menu</a></li>
+            <li><a href="#order-online">Order online </a></li>
+            <li><a href="book a table.html">Book a table or event </a></li>
+            <li><a href="#contact"> Contact</a></li>
+        </ul>
+    </nav>
+
+  <div class="contact-page">
+    <h1>Contact Us</h1>
+    <p>Feel free to get in touch with us for any inquiries.</p>
+
+    
+    <div class="social-icons">
+      <a href="https://facebook.com" target="_blank" class="icon facebook">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+      <a href="https://instagram.com" target="_blank" class="icon instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="tel:+1234567890" class="icon phone">
+        <i class="fas fa-phone-alt"></i>
+      </a>
+    </div>
+
+<!-- Leave Us a Note -->
+
+    <div class="notes-section">
+      <h2>Leave Us a Note</h2>
+      <textarea id="notes" placeholder="Write your notes here..."></textarea>
+      <button class="send-note-btn">Send Note</button>
+    </div>
+
+<!-- Apply for a Job -->
+
+    <button id="openFormBtn" class="open-form-btn">Apply for a Job</button>
+
+   
+    <div id="jobForm" class="form-container hidden">
+      <div class="form-content">
+        <span id="closeFormBtn" class="close-btn">&times;</span>
+        <h2>Job Application</h2>
+
+
+        <form>
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" required>
+
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" >
+
+          <label for="age">Address:</label>
+          <input type="text" id="age" name="Age">
+
+          <label for="experience">Number of years of experience :</label>
+          <input type="number" id="experience" name="Number of years of experience" required>
+
+          <label for="age">Age:</label>
+          <input type="number" id="age" name="Age" required>
+
+          <label for="phone_number">Your phone number:</label>
+          <input type="number" id="age" name="phone_number" required>
+
+          <label class="jop">Choose a job</label>
+        <div class="jobs">
+            <label>
+                <input type="radio" id="chef" name="agreement" required>
+                Chef
+                <input type="radio" id="barista" name="agreement">
+                Barista
+                <input type="radio" id="waiter" name="agreement">
+                Waiter
+                <input type="radio" id="cashier" name="agreement">
+                Cashier
+            </label>
+        </div><hr>
+
+          <label class="question">Did you perform military service?</label><br>
+          <div class="radio-group">
+            <label>
+              <input type="radio" id="yes" name="agreement" value="yes" required>
+              Yes
+              <input type="radio" id="no" name="agreement" value="no">
+              No
+            </label>
+          </div><hr>
+
+          <label class="question">gender</label><br>
+          <div class="radio-group">
+            <label>
+              <input type="radio" id="yes" name="agreement" value="yes" required>
+              Male
+              <input type="radio" id="no" name="agreement" value="no">
+              Female
+            </label>
+          </div><hr>
+
+          <button type="submit" class="submit-btn">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+
+  <script src="contact_script.js"></script>
+</body>
+</html>
