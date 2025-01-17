@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/menu-surf.css">
+    <title>Sufr & Turf menu </title>
+</head>
+<body>
+    <header>
+        <button id="toggle-nav">☰</button>
+        <nav id="nav-menu">
+            <ul class="menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="surf-menu.html">Surf-menu</a></li>
+                <li><a href="#tajine">Tajiin-menu</a></li>
+                <li><a href="#order-online">Order online </a></li>
+                <li><a href="book a table.html">Book a table or event </a></li>
+                <li><a href="contact and find jop/contact.html"> Contact</a></li>
+            </ul>
+        </nav>
+        <h1>  Surf & Turf</h1>
+    </header>
+
+    <!-- الأزرار الرئيسية -->
+    <div class="menu-buttons">
+        <button onclick="toggleSubButtons('food')">Food</button>
+        <button onclick="toggleSubButtons('drink')">Drinks</button>
+        <button onclick="toggleSubButtons('dessert')">Desserts</button>
+    </div>
+
+    <!-- الأزرار الفرعية للمأكولات -->
+    <div id="food-buttons" class="category-buttons" style="display: none;">
+       
+        <div class="category-button" onclick="showSection('seafood')">
+            <img src="img/img-menu/472497028_122218424690033345_6533966988156872990_n.jpg" alt="saefood">
+            <div class="overlay">Seafood</div>
+        </div>
+       
+       
+       
+        <div class="category-button" onclick="showSection('pizza')">
+            <img src="img/img-menu/pizza.jpg" alt="بيتزا">
+            <div class="overlay">Pizza</div>
+        </div>
+        <div class="category-button" onclick="showSection('sandwiches')">
+            <img src="img/img-menu/coldsanwich.jfif" alt="sandwiches">
+            <div class="overlay">Sandwiches</div>
+        </div>
+        <div class="category-button" onclick="showSection('pasta')">
+            <img src="img/img-menu/pasta corner.jfif" alt="Pasta">
+            <div class="overlay">Pasta</div>
+        </div>
+
+        <div class="category-button" onclick="showSection('salad')">
+            <img src="img/img-menu/salad corner.jpg" alt="salad">
+            <div class="overlay">Salad</div>
+        </div>
+
+
+
+        <div class="category-button" onclick="showSection('kids')">
+            <img src="img/img-menu/kids.jpg" alt="kids-meals">
+            <div class="overlay">Kids Meals</div>
+        </div>
+       
+        <!-- أضف المزيد من الأزرار الفرعية هنا -->
+    </div>
+
+    <!-- الأزرار الفرعية للمشروبات -->
+    <div id="drink-buttons" class="category-buttons" style="display: none;">
+        <div class="category-button" onclick="showSection('hot-drinks')">
+            <img src="img/img-menu/hot.jpg" alt="hot drinks">
+            <div class="overlay">Hot Drinks</div>
+        </div>
+        <div class="category-button" onclick="showSection('soft-drinks')">
+            <img src="img/img-menu/fizzy-cola-drink-macro-shot.jpg" alt=" soft drinks">
+            <div class="overlay"> Soft Drinks</div>
+        </div>
+        <!-- أضف المزيد من الأزرار الفرعية هنا -->
+    </div>
+
+    <!-- الأزرار الفرعية للحلويات -->
+    <div id="dessert-buttons" class="category-buttons" style="display: none;">
+        <div class="category-button" onclick="showSection('cake')">
+            <img src="img/img-menu/side-view-cake-with-raisins-white-plate-cup-black-tea-purple-blue.jpg" alt="كيك">
+            <div class="overlay">English Cake</div>
+        </div>
+        <div class="category-button" onclick="showSection('ice-cream')">
+            <img src="img/img-menu/chocolate-ice-cream-dessert_144627-8364.jpg" alt="آيس كريم">
+            <div class="overlay">Ice cream</div>
+        </div>
+        <!-- أضف المزيد من الأزرار الفرعية هنا -->
+    </div>
+
+    <!-- أقسام القائمة -->
+    <div id="pizza" class="menu-section">
+        <button class="close-section" onclick="closeSection('pizza')">✕</button>
+        <div class="menu-item">
+            <img src="img/img-menu/pizza.jpg" alt="بيتزا مارغريتا">
+            <div>
+                <h3>بيتزا مارغريتا</h3>
+                <p>عجينة هشة وصلصة طماطم وجبنة موزاريلا.</p>
+                <p>السعر: 50 جنيه</p>
+                <button class="add-to-cart" onclick="addToCart('بيتزا مارغريتا', 50)">إضافة إلى السلة</button>
+            </div>
+        </div>
+        <div class="menu-item">
+            <img src="img/img-menu/pizza.jpg" alt="بيتزا بيبروني">
+            <div>
+                <h3>بيتزا بيبروني</h3>
+                <p>عجينة مقرمشة مع بيبروني وجبنة.</p>
+                <p>السعر: 60 جنيه</p>
+                <button class="add-to-cart" onclick="addToCart('بيتزا بيبروني', 60)">إضافة إلى السلة</button>
+            </div>
+        </div>
+        <div class="menu-item">
+            <img src="img/img-menu/pizza.jpg" alt="بيتزا بيبروني">
+            <div>
+                <h3>بيتزا بيبروني</h3>
+                <p>عجينة مقرمشة مع بيبروني وجبنة.</p>
+                <p>السعر: 60 جنيه</p>
+                <button class="add-to-cart" onclick="addToCart('بيتزا بيبروني', 60)">إضافة إلى السلة</button>
+            </div>
+        </div>
+        <div class="menu-item">
+            <img src="img/img-menu/pizza beb.jpg" alt="بيتزا بيبروني">
+            <div>
+                <h3>بيتزا بيبروني</h3>
+                <p>عجينة مقرمشة مع بيبروني وجبنة.</p>
+                <p>السعر: 60 جنيه</p>
+                <button class="add-to-cart" onclick="addToCart('بيتزا بيبروني', 60)">إضافة إلى السلة</button>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- seafood -->
+
+
+    <div id="seafood" class="menu-section">
+        <button class="close-section" onclick="closeSection('seafood')">✕</button>
+
+        
+        <div class="menu-item">
+            <img src="img/img-menu/472497028_122218424690033345_6533966988156872990_n.jpg" alt=" bori sinjary">
+            <div>
+                <h3> بوري سنجاري</h3>
+                <p>بوري سنجاري مع الحمبري وارز الصيادية</p>
+                <p>السعر: 50 جنيه</p>
+                <button class="add-to-cart" onclick="addToCart('بوري سنجاري ', 270)">إضافة إلى السلة</button>
+            </div>
+            </div>
+            <div class="menu-item">
+                <img src="img/img-menu/472497028_122218424690033345_6533966988156872990_n.jpg" alt=" mix seafood">
+                <div>
+                    <h3> ميكس سي فوود </h3>
+                    <p style="padding: 5px; line-height: 20px;">  سمك فيلي مع الجمبري المشوي والكاليماري واصابع الكابوريا والذرة الصفراء في كيس حراري</p>
+                    <p>السعر: 50 جنيه</p>
+                    <button class="add-to-cart" onclick="addToCart('ميكس سي فوود ', 260)">إضافة إلى السلة</button>
+                </div>
+                </div>
+                <div class="menu-item">
+                    <img src="img/img-menu/472497028_122218424690033345_6533966988156872990_n.jpg" alt=" bori sinjary">
+                    <div>
+                        <h3> بوري سنجاري</h3>
+                        <p>بوري سنجاري مع الحمبري وارز الصيادية</p>
+                        <p>السعر: 50 جنيه</p>
+                        <button class="add-to-cart" onclick="addToCart('بوري سنجاري ', 270)">إضافة إلى السلة</button>
+                    </div>
+                    </div>
+            
+
+
+        </div>
+
+    <!-- سلة التسوق -->
+    <button class="cart-icon" onclick="toggleCart()">🛒</button>
+
+    <div class="popup" id="cartPopup" style="width:80%">
+        <button class="close-cart" onclick="toggleCart()">✕</button>
+        <h2 style="text-align:center">الطلبات</h2>
+        <div id="cartItems"></div>
+        <textarea placeholder="أدخل ملاحظاتك هنا..."></textarea>
+        <input type="number" placeholder="ادخل رقم الطاولة">
+        <button class="send-order">إرسال الطلب</button>
+    </div>
+
+    <!-- Toast Message -->
+    <div id="toast" class="toast">تمت إضافة الطلب إلى السلة!</div>
+
+    <script src="script/menu-surf.js"></script>
+</body>
+</html>

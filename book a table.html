@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/book.css">
+    <title>حجز طاولة</title>
+   
+</head>
+<body>
+    <header>
+        <button id="toggle-nav">☰</button>
+        <nav id="nav-menu">
+            <ul class="menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="surf-menu.html">Surf-menu</a></li>
+                <li><a href="#tajine">Tajiin-menu</a></li>
+                <li><a href="#order-online">Order online </a></li>
+                <li><a href="book a table.html">Book a table or event </a></li>
+                <li><a href="contact and find jop/contact.html"> Contact</a></li>
+                </ul>
+        </nav>
+        <h1>حجز طاولة أو إيفنت</h1>
+        
+    </header>
+    <div class="booking-form">
+        <form action="#" method="post">
+            <!-- الاسم -->
+            <div class="form-group">
+                <label for="name">الاسم بالكامل:</label>
+                <input type="text" id="name" name="name" placeholder="أدخل اسمك" required>
+            </div>
+            <!-- البريد الإلكتروني -->
+            <div class="form-group">
+                <label for="email">البريد الإلكتروني:</label>
+                <input type="email" id="email" name="email" placeholder="أدخل بريدك الإلكتروني" required>
+            </div>
+            <!-- رقم الهاتف -->
+            <div class="form-group">
+                <label for="phone">رقم الهاتف:</label>
+                <input type="tel" id="phone" name="phone" placeholder="أدخل رقم هاتفك" required>
+            </div>
+            <!-- نوع الحجز -->
+            <div class="form-group">
+                <label for="event-type">نوع الحجز:</label>
+                <select id="event-type" name="event-type" required>
+                    <option value="" disabled selected>اختر نوع الحجز</option>
+                    <option value="table">حجز طاولة</option>
+                    <option value="birthday">حجز عيد ميلاد</option>
+                    <option value="event">حجز إيفنت خاص</option>
+                </select>
+            </div>
+            <!-- التاريخ -->
+            <div class="form-group">
+                <label for="date">التاريخ:</label>
+                <input type="date" id="date" name="date" required>
+            </div>
+            <!-- الوقت -->
+            <div class="form-group">
+                <label for="time">الوقت:</label>
+                <input type="time" id="time" name="time" required>
+            </div>
+            <!-- عدد الأشخاص -->
+            <div class="form-group">
+                <label for="guests">عدد الأشخاص:</label>
+                <input type="number" id="guests" name="guests" min="1" placeholder="أدخل عدد الأشخاص" required>
+            </div>
+            <!-- ملاحظات إضافية -->
+            <div class="form-group">
+                <label for="notes">ملاحظات إضافية:</label>
+                <textarea id="notes" name="notes" placeholder="أدخل أي ملاحظات إضافية"></textarea>
+            </div>
+            <!-- زر الحجز -->
+            <div class="form-group">
+                <button type="submit">احجز الآن</button>
+            </div>
+        </form>
+    </div>
+        <script src="script/home.js"></script>
+</body>
+</html>
