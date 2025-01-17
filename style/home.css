@@ -1,0 +1,210 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height:100vh;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-image:url(../img/home.jpg); /* لون الخلفية */
+    background-size: cover;
+    background-position: center;
+     background-repeat: no-repeat;
+
+    background-size: cover;
+    
+    
+    color: #ffcc00; /* لون الخطوط */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* لجعل الصفحة تأخذ الطول الكامل للشاشة */
+}
+
+#nav-menu {
+position: fixed;
+top: 0;
+left: 0;
+width: 250px;
+height: 100%;
+background-color: #000000cc;
+color: white;
+transform: translateX(-100%);
+transition: transform 0.3s ease-in-out;
+z-index: 999;
+}
+
+#nav-menu ul {
+list-style: none;
+padding-left: 10px;
+padding-top: 70px;
+}
+
+#nav-menu ul li {
+margin: 15px 0px;
+padding: 10px;
+}
+
+#nav-menu ul li a {
+color: #fff;
+text-decoration: none;
+font-size: 18px;
+transition: color 0.3s;
+}
+
+#nav-menu ul li a:hover {
+color: #f4b400;
+}
+
+#toggle-nav {
+position: fixed;
+top: 20px;
+left: 20px;
+font-size: 24px;
+background-color: #000000cc;
+color: white;
+border: none;
+padding: 10px 15px;
+border-radius: 5px;
+cursor: pointer;
+z-index: 1000;
+}
+
+#nav-menu.show {
+transform: translateX(0);
+}
+
+header {
+    background-color: rgba(30, 30, 30, 0.2); /* لون شفاف بنسبة 50% *//* لون خلفية الأقسام */
+         color: #ffcc00; /* لون الخطوط */
+    padding: 1rem 0; /* استخدام وحدات rem */
+    flex-shrink: 0; /* لمنع التقلص */
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2rem; /* حجم أكبر للعنوان */
+}
+
+main {
+    display: flex;
+    justify-content: space-between; /* لجعل الأقسام بجانب بعضها */
+    align-items: center;
+    padding: 1rem;
+    flex: 1; /* لجعل المحتوى الرئيسي يأخذ المساحة المتبقية */
+    gap: 1rem; /* مسافة بين الأقسام */
+}
+
+.left-section, .right-section {
+    width: 48%; /* عرض أقل قليلاً لضمان وجود مسافة بينهما */
+    height: 70vh; /* ارتفاع نسبي للشاشة */
+    padding: 1rem;
+   background-color: rgba(30, 30, 30, 0.5); /* لون شفاف بنسبة 50% *//* لون خلفية الأقسام */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* توسيط المحتوى عموديًا */
+    align-items: center; /* توسيط المحتوى أفقيًا */
+    transition:0.4s
+}
+.left-section:hover, .right-section:hover{
+transform:scale(0.9)
+}
+
+.logo-placeholder {
+    width: 80px; /* عرض الصورة */
+    height: 80px; /* ارتفاع الصورة */
+    margin: 0 auto 1rem; /* استخدام وحدات rem */
+    border-radius: 50%; /* لجعل الصورة دائرية */
+    overflow: hidden; /* لإخفاء الأجزاء الزائدة من الصورة */
+}
+
+.logo-placeholder img {
+    width: 100%; /* لجعل الصورة تأخذ المساحة بالكامل */
+    height: 100%; /* لجعل الصورة تأخذ المساحة بالكامل */
+    object-fit: cover; /* لجعل الصورة تغطي المساحة دون تشويه */
+}
+
+h2 {
+    font-size: 1.5rem; /* حجم مناسب للنصوص */
+    margin-bottom: 1rem; /* استخدام وحدات rem */
+    color: #ffcc00; /* لون الخطوط */
+}
+
+button {
+    padding: 0.8rem 1.5rem; /* حجم مناسب للأزرار */
+    font-size: 1rem; /* حجم مناسب لنص الأزرار */
+    color: #1e1e1e; /* لون نص الزر */
+    background-color: #ffcc00; /* لون خلفية الزر */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 1rem; /* استخدام وحدات rem */
+}
+
+button:hover {
+    background-color: #e6b800; /* لون خلفية الزر عند التمرير */
+}
+
+footer {
+    background-color: rgba(30, 30, 30, 0.5); /* لون شفاف بنسبة 50% *//* لون خلفية الأقسام */
+    color: #ffcc00; /* لون الخطوط */
+    padding: 1rem 0;
+    flex-shrink: 0; /* لمنع التقلص */
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap; /* للتجاوب مع الشاشات الصغيرة */
+}
+
+.working-hours, .copyright {
+    margin: 0.5rem; /* استخدام وحدات rem */
+}
+
+.working-hours h3 {
+    margin-bottom: 0.5rem; /* استخدام وحدات rem */
+    font-size: 1.2rem; /* حجم مناسب لعناوين الفوتر */
+}
+
+.working-hours p, .copyright p {
+    font-size: 1rem; /* حجم مناسب لنصوص الفوتر */
+}
+a{
+    text-decoration: none;
+    color: #1e1e1e;
+}
+
+/* تحسينات للشاشات الصغيرة */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 1.5rem; /* تصغير حجم العنوان */
+    }
+
+    .left-section, .right-section {
+        width: 48%; /* عرض أقل قليلاً لضمان وجود مسافة بينهما */
+        height: auto; /* ارتفاع تلقائي */
+        padding: 1rem;
+    }
+
+    h2 {
+        font-size: 1.2rem; /* تصغير حجم النصوص */
+    }
+
+    button {
+        padding: 0.6rem 1.2rem; /* تصغير حجم الأزرار */
+        font-size: 0.9rem; /* تصغير حجم نص الأزرار */
+    }
+
+    .working-hours h3 {
+        font-size: 1rem; /* تصغير حجم عناوين الفوتر */
+    }
+
+    .working-hours p, .copyright p {
+        font-size: 0.9rem; /* تصغير حجم نصوص الفوتر */
+    }
+}

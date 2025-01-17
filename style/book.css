@@ -1,0 +1,164 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1e1e1e;
+    color: #ffcc00;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    text-align: center;
+    padding: 20px;
+}
+#nav-menu {
+position: fixed;
+top: 0;
+left: 0;
+width: 250px;
+height: 100%;
+background-color: #000000cc;
+color: white;
+transform: translateX(-100%);
+transition: transform 0.3s ease-in-out;
+z-index: 999;
+}
+
+#nav-menu ul {
+list-style: none;
+padding-left: 10px;
+padding-top: 70px;
+}
+
+#nav-menu ul li {
+margin: 25px 0px;
+}
+
+#nav-menu ul li a {
+color: #fff;
+text-decoration: none;
+font-size: 18px;
+transition: color 0.3s;
+}
+
+#nav-menu ul li a:hover {
+color: #f4b400;
+}
+
+#toggle-nav {
+position: fixed;
+top: 20px;
+left: 20px;
+font-size: 24px;
+background-color: #000000cc;
+color: white;
+border: none;
+padding: 10px 15px;
+border-radius: 5px;
+cursor: pointer;
+z-index: 1000;
+}
+
+#nav-menu.show {
+transform: translateX(0);
+}
+.menu .submenu {
+display: none;
+position: fixed; 
+background-color: #000000e1;
+padding: 10px;
+list-style: none;
+justify-content:space-around ;
+
+
+}
+
+.menu li:hover .submenu {
+display: block;
+
+}
+
+h1 {
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+.booking-form {
+    max-width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #333;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 18px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 80%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #444;
+    color: #ffcc00;
+    font-size: 16px;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #999;
+}
+
+.form-group textarea {
+    resize: vertical;
+    height: 100px;
+}
+
+.form-group button {
+    background-color: #ffcc00;
+    color: #1e1e1e;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.form-group button:hover {
+    background-color: #e6b800;
+}
+
+/* Media Queries للتجاوب مع الشاشات الصغيرة */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 24px;
+    }
+
+    .booking-form {
+        padding: 15px;
+    }
+
+    .form-group label {
+        font-size: 16px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        font-size: 14px;
+    }
+
+    .form-group button {
+        font-size: 16px;
+    }
+}
