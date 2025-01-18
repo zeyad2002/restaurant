@@ -13,12 +13,11 @@
     <button id="toggle-nav">☰</button>
     <nav id="nav-menu">
         <ul class="menu">
-          <li><a href="../index.html">Home</a></li>
-          <li><a href="../surf-menu.html">Surf-menu</a></li>
-          <li><a href="#tajine">Tajiin-menu</a></li>
-          <li><a href="#order-online">Order online </a></li>
-          <li><a href="../book a table.html">Book a table or event </a></li>
-          <li><a href="contact.html"> Contact</a></li>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#tajine">Tajiin-menu</a></li>
+            <li><a href="#order-online">Order online </a></li>
+            <li><a href="book a table.html">Book a table or event </a></li>
+            <li><a href="#contact"> Contact</a></li>
         </ul>
     </nav>
 
@@ -80,36 +79,37 @@
           <label class="jop">Choose a job</label>
         <div class="jobs">
             <label>
-                <input type="radio" id="chef" name="agreement" required>
+                <input type="radio" id="chef" name="work" required>
                 Chef
-                <input type="radio" id="barista" name="agreement">
+                <input type="radio" id="barista" name="work">
                 Barista
-                <input type="radio" id="waiter" name="agreement">
+                <input type="radio" id="waiter" name="work">
                 Waiter
-                <input type="radio" id="cashier" name="agreement">
+                <input type="radio" id="cashier" name="work">
                 Cashier
             </label>
         </div><hr>
 
+        <label class="question">gender</label><br>
+        <div class="radio-group">
+          <label>
+            <input type="radio" id="male" name="gender" value="male" onclick="toggleLabel()" required>
+            Male
+            <input type="radio" id="female" name="gender" value="female" onclick="toggleLabel()" >
+            Female
+          </label>
+        </div><hr>
+      <div id="additionalQuestion" style="display: none;">
           <label class="question">Did you perform military service?</label><br>
           <div class="radio-group">
             <label>
-              <input type="radio" id="yes" name="agreement" value="yes" required>
+              <input type="radio" id="additional" name="military_service" value="yes" required>
               Yes
-              <input type="radio" id="no" name="agreement" value="no">
+              <input type="radio" id="no" name="military_service" value="no">
               No
             </label>
           </div><hr>
-
-          <label class="question">gender</label><br>
-          <div class="radio-group">
-            <label>
-              <input type="radio" id="yes" name="agreement" value="yes" required>
-              Male
-              <input type="radio" id="no" name="agreement" value="no">
-              Female
-            </label>
-          </div><hr>
+        </div>
 
           <button type="submit" class="submit-btn">Submit</button>
         </form>
