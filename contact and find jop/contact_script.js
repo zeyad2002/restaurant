@@ -19,3 +19,15 @@ toggleButton.addEventListener('click', () => {
   navMenu.classList.toggle('show'); // تبديل كلاس "show" لإظهار/إخفاء القائمة
 });
 
+function toggleLabel() {
+  const maleRadio = document.getElementById("male");
+  const additionalQuestion = document.getElementById("additionalQuestion");
+  
+  if (maleRadio.checked) {
+    additionalQuestion.style.display = "block";
+  } else {
+    additionalQuestion.style.display = "none";
+  }
+  
+}
+
