@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+
+body {
+    font-family: Arial, sans-serif;
+    background-image: url(g.jfif);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    
+    color: #ffcc00;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    text-align: center;
+    padding: 20px;
+}
+
+#nav-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100%;
+    background-color: #000000cc;
+    color: white;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+    z-index: 999;
+}
+
+#nav-menu ul {
+    list-style: none;
+    padding-left: 10px;
+    padding-top: 70px;
+}
+
+#nav-menu ul li {
+    margin: 15px 0px;
+    padding: 10px;
+}
+
+#nav-menu ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    transition: color 0.3s;
+}
+
+#nav-menu ul li a:hover {
+    color: #f4b400;
+}
+
+#toggle-nav {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    font-size: 24px;
+    background-color: #000000cc;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+#nav-menu.show {
+    transform: translateX(0);
+}
+
+.menu-buttons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+    margin: 20px;
+}
+
+.menu-buttons button {
+    background-color: #ffcc00;
+    color: #1e1e1e;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: 0.7s;
+}
+
+.menu-buttons button:hover {
+    background-color: #e6b800;
+    transform: scale(0.90);
+}
+
+.category-buttons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+    margin: 20px;
+}
+
+.category-button {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    aspect-ratio: 1 / 1; /* يجعل الأزرار مربعة */
+    background-color: #333;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.category-button img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.category-button .overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 10px;
+    z-index: 2;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.category-button:hover {
+    transform: scale(0.90);
+}
+
+.menu-section {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+    overflow-y: auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.menu-section.active {
+    display: block;
+}
+
+.menu-section .close-section {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: #ffcc00;
+    color: #1e1e1e;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    border-bottom: 1px solid #333;
+    background-color: #1e1e1e;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+
+.menu-item img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin: 15px;
+}
+
+.menu-item:nth-child(odd) {
+    flex-direction: row;
+}
+
+.menu-item:nth-child(even) {
+    flex-direction: row-reverse;
+}
+
+.add-to-cart {
+    margin-top: 10px;
+    background-color: #ffcc00;
+    color: #1e1e1e;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.add-to-cart:hover {
+    background-color: #e6b800;
+}
+
+.cart-icon {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #ffcc00;
+    color: #1e1e1e;
+    border: none;
+    padding: 15px;
+    cursor: pointer;
+    border-radius: 50%;
+    font-size: 20px;
+}
+
+.popup {
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: #333;
+    color: #ffcc00;
+    width: 300px;
+    height: 100vh;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+    padding: 20px;
+    box-shadow: -5px 0 10px rgba(0, 0, 0, 0.5);
+    overflow-y: auto;
+    z-index:998;
+}
+
+.popup.active {
+    transform: translateX(0);
+}
+
+.popup h2 {
+    margin-top: 0;
+    text-align: center;
+}
+
+.popup .cart-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.popup button {
+    background-color: #ffcc00;
+    color: #1e1e1e;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.popup textarea {
+    width: 80%;
+    height: 60px;
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background: #1e1e1e;
+    color: #fcd34d;
+    border: solid 1px #333;
+    text-align: right;
+}
+
+input {
+    background: #1e1e1e;
+    text-align: right;
+    border: solid 2px #1e1e1e;
+    margin-left: 10px;
+}
+
+.popup .send-order {
+    margin-top: 10px;
+    width: 100%;
+    padding: 10px;
+    background-color: #ffcc00;
+    color: #1e1e1e;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.popup .send-order:hover {
+    background-color: #e6b800;
+}
+
+.popup .close-cart {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #ffcc00;
+    color: #1e1e1e;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/* Toast Message */
+.toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    z-index: 1000;
+    display: none;
+    animation: fadeInOut 3s ease-in-out;
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .category-buttons {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    }
+
+    .category-button .overlay {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .menu-item {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .menu-item img {
+        height: auto;
+        margin: 10px 0;
+    }
+
+    .toast {
+        width: 90%;
+        text-align: center;
+    }
+}
+
+    </style>
+    <title> Tagjiin</title>
+</head>
+<body>
+    <header>
+        <button id="toggle-nav">☰</button>
+        <nav id="nav-menu">
+            <ul class="menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="surf-menu.html">Surf-menu</a></li>
+                <li><a href="#tajine">Tajiin-menu</a></li>
+                <li><a href="#order-online">Order online </a></li>
+                <li><a href="book a table.html">Book a table or event </a></li>
+                <li><a href="contact and find jop/contact.html"> Contact</a></li>
+            </ul>
+        </nav>
+        <h1>  Tajiin</h1>
+    </header>
+
+    <!-- الأزرار الرئيسية -->
+    <div class="menu-buttons">
+        <button onclick="toggleSubButtons('food')">Food</button>
+        <button onclick="toggleSubButtons('drink')">Drinks</button>
+        <button onclick="toggleSubButtons('dessert')">Desserts</button>
+    </div>
+
+    <!-- الأزرار الفرعية للمأكولات -->
+    <div id="food-buttons" class="category-buttons" style="display: none;">
+       
+
+       
+       
+       
+        <div class="category-button" onclick="showSection('mashwy')">
+            <img src="images/ركن المشويات.jpg" alt="المشويات">
+            <div class="overlay">المشويات</div>
+        </div>
+
+        <div class="category-button" onclick="showSection('tajins')">
+            <img src="images/ركن الطواجن.jpg" alt="الطواجن">
+            <div class="overlay">الطواجن</div>
+        </div>
+
+        <div class="category-button" onclick="showSection('sawany')">
+            <img src="images/ركن الصواني.jpg" alt="الصواني">
+            <div class="overlay">الصواني</div>
+        </div>
+
+        <div class="category-button" onclick="showSection('soup')">
+            <img src="images/ركن الشوربة.jpg" alt="شوربة">
+            <div class="overlay">الشوربة</div>
+        </div>
+
+       
+        <!-- أضف المزيد من الأزرار الفرعية هنا -->
+    </div>
+
+    <!-- الأزرار الفرعية للمشروبات -->
+    <div id="drink-buttons" class="category-buttons" style="display: none;">
+        <div class="category-button" onclick="showSection('hot-drinks')">
+            <img src="img/img-menu/hot.jpg" alt="hot drinks">
+            <div class="overlay">المشروبات الساخنة </div>
+        </div>
+        <div class="category-button" onclick="showSection('soft-drinks')">
+            <img src="images/عصائر فريش.jpg" alt=" soft drinks">
+            <div class="overlay"> عصائر فريش </div>
+        </div>
+        <!-- أضف المزيد من الأزرار الفرعية هنا -->
+    </div>
+
+    <!-- الأزرار الفرعية للحلويات -->
+    <div id="dessert-buttons" class="category-buttons" style="display: none;">
+        <div class="category-button" onclick="showSection('cake')">
+            <img src="images/مولتن.jfif" alt="كيك">
+            <div class="overlay">مولتن كيك</div>
+        </div>
+        <div class="category-button" onclick="showSection('ice-cream')">
+            <img src="img/img-menu/ice.jpg" alt="آيس كريم">
+            <div class="overlay">ايس كريم </div>
+        </div>
+        <!-- أضف المزيد من الأزرار الفرعية هنا -->
+    </div>
+
+    <!-- أقسام القائمة -->
+
+
+
+    <!-- المشويات  -->
+    <div id="mashwy" class="menu-section">
+        <button class="close-section" onclick="closeSection('mashwy')">✕</button>
+        <div class="menu-item">
+            <img src="images/كفتة علي الفحم.jpg" alt=" ">
+            <div>
+                <h3> كفتة علي الشواية</h3>
+                <!-- <p>عجينة هشة وصلصة طماطم وجبنة موزاريلا.</p> -->
+                <p>السعر: 195 جنيه</p>
+                <button class="add-to-cart" onclick="addToCart(' كفتة علي الشواية', 195)">إضافة إلى السلة</button>
+            </div>
+        </div>
+        <div class="menu-item">
+            <img src="images/كفتة علي الفحم.jpg" alt=" ">
+            <div>
+                <h3> كفتة علي الشواية</h3>
+                <!-- <p>عجينة هشة وصلصة طماطم وجبنة موزاريلا.</p> -->
+                <p>السعر: 195 جنيه</p>
+                <button class="add-to-cart" onclick="addToCart(' كفتة علي الشواية', 195)">إضافة إلى السلة</button>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <!-- الطواجن -->
+
+
+    <div id="tajins" class="menu-section">
+        <button class="close-section" onclick="closeSection('tajins')">✕</button>
+
+        
+        <div class="menu-item">
+            <img src="images/طاجن حمام بالفريك.jpg" alt=" bori sinjary">
+            <div>
+                <h3>  طاجن حمام بالفريك.</h3>
+                <!-- <p>بوري سنجاري مع الحمبري وارز الصيادية</p> -->
+                <p>السعر: 200 جنيه</p>
+                <button class="add-to-cart" onclick="addToCart(' طاجن حمام بالفريك. ', 200)">إضافة إلى السلة</button>
+            </div>
+            </div>
+            <div class="menu-item">
+                <img src="images/طاجن مسقعة.jpg" alt=" mix seafood">
+                <div>
+                    <h3> طاجن مسقعة.</h3>
+                    <!-- <p style="padding: 5px; line-height: 20px;">  سمك فيلي مع الجمبري المشوي والكاليماري واصابع الكابوريا والذرة الصفراء في كيس حراري</p> -->
+                    <p>السعر: 150 جنيه</p>
+                    <button class="add-to-cart" onclick="addToCart('طاجن مسقعة.', 150)">إضافة إلى السلة</button>
+                </div>
+                </div>
+                <div class="menu-item">
+                    <img src="images/طاجن ضلوع.jpg" alt=" bori sinjary">
+                    <div>
+                        <h3> طاجن ضلوع</h3>
+                        <!-- <p>بوري سنجاري مع الحمبري وارز الصيادية</p> -->
+                        <p>السعر: 200 جنيه</p>
+                        <button class="add-to-cart" onclick="addToCart('طاجن ضلوع.', 200)">إضافة إلى السلة</button>
+                    </div>
+                    </div>
+            
+
+
+        </div>
+
+
+        <!-- الصواني -->
+
+
+
+        <div id="sawany" class="menu-section">
+            <button class="close-section" onclick="closeSection('sawany')">✕</button>
+    
+            
+            <div class="menu-item">
+                <img src="images/السعادة.jpg" alt=" bori sinjary">
+                <div>
+                    <h3>  صنية السعادة</h3>
+                    <!-- <p>بوري سنجاري مع الحمبري وارز الصيادية</p> -->
+                    <p>السعر: 1200 جنيه</p>
+                    <button class="add-to-cart" onclick="addToCart('صنية السعادة ', 1200)">إضافة إلى السلة</button>
+                </div>
+                </div>
+                <div class="menu-item">
+                    <img src="images/الصحاب.jpg" alt=" mix seafood">
+                    <div>
+                        <h3> صنية الصحاب</h3>
+                        <!-- <p style="padding: 5px; line-height: 20px;">  سمك فيلي مع الجمبري المشوي والكاليماري واصابع الكابوريا والذرة الصفراء في كيس حراري</p> -->
+                        <p>السعر: 1600 جنيه</p>
+                        <button class="add-to-cart" onclick="addToCart('صنية الصحاب', 1600)">إضافة إلى السلة</button>
+                    </div>
+                    </div>
+
+                
+    
+    
+            </div>
+
+    <!-- سلة التسوق -->
+    <button class="cart-icon" onclick="toggleCart()">🛒</button>
+
+    <div class="popup" id="cartPopup" style="width:80%">
+        <button class="close-cart" onclick="toggleCart()">✕</button>
+        <h2 style="text-align:center">الطلبات</h2>
+        <div id="cartItems"></div>
+        <textarea placeholder="أدخل ملاحظاتك هنا..."></textarea>
+        <input type="number" placeholder="ادخل رقم الطاولة">
+        <button class="send-order">إرسال الطلب</button>
+    </div>
+
+    <!-- Toast Message -->
+    <div id="toast" class="toast">تمت إضافة الطلب إلى السلة!</div>
+
+    <script src="script/menu-surf.js"></script>
+</body>
+</html>
