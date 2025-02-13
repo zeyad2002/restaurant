@@ -208,3 +208,19 @@ a{
         font-size: 0.9rem; /* تصغير حجم نصوص الفوتر */
     }
 }
+@keyframes glow {
+    0% {
+        text-shadow: 0 0 3px #ffcc00, 0 0 6px #ffcc00, 0 0 12px #ffcc00;
+    }
+    50% {
+        text-shadow: 0 0 10px #ffaa00, 0 0 15px #ffaa00, 0 0 20px #ffaa00;
+    }
+    100% {
+        text-shadow: 0 0 3px #ffcc00, 0 0 6px #ffcc00, 0 0 12px #ffcc00;
+    }
+}
+
+h1 {
+    animation: glow 2s infinite alternate;
+    letter-spacing:2px
+}
